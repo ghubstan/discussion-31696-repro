@@ -1,0 +1,51 @@
+plugins {
+    id 'java'
+    id 'io.quarkus'
+}
+
+group 'io.dongxi'
+version '0.0.1-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
+
+dependencies {
+    implementation enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}")
+
+    implementation 'org.awaitility:awaitility'
+    implementation 'io.quarkus:quarkus-arc'
+    implementation 'io.quarkus:quarkus-container-image-jib'
+    implementation 'io.quarkus:quarkus-kubernetes'
+    implementation 'io.quarkus:quarkus-micrometer-registry-prometheus'
+    implementation 'io.quarkus:quarkus-reactive-routes'
+    implementation 'io.quarkus:quarkus-rest-client-reactive-jsonb'
+    implementation 'io.smallrye.reactive:smallrye-mutiny-vertx-web'
+    implementation 'io.quarkus:quarkus-vertx'
+
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.rest-assured:rest-assured'
+}
+
+test {
+    systemProperty "java.util.logging.manager", "org.jboss.logmanager.LogManager"
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+compileJava {
+    options.encoding = 'UTF-8'
+    options.compilerArgs << '-parameters'
+}
+
+compileTestJava {
+    options.encoding = 'UTF-8'
+}

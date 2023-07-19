@@ -1,0 +1,12 @@
+# Gradle Version Catalog only for dependencies not defined in the Quarkus platform bom.
+# TODO Find out how to use version cataloog with Quarkus platform/bom, to place all version restrictions here.
+
+[versions]
+lombok-lib = { strictly = '1.18.24' }
+
+[libraries]
+lombok = { module = 'org.projectlombok:lombok', version.ref = 'lombok-lib' }
+
+[bundles]
+
+[plugins]
